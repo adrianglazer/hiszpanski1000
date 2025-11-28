@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hiszpański 1000 - Fiszki</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Welcome Screen -->
+      <div id="welcomeScreen" class="welcome-screen active">
+        <div class="welcome-content">
+          <h1>🇪🇸 Hiszpański 1000</h1>
+          <div class="welcome-description">
+            <p>1000 najczęściej używanych słów</p>
+            <p class="highlight">
+              Opanuj je, a zrozumiesz ~75% języka hiszpańskiego!
+            </p>
+          </div>
+          <button class="btn btn-start" id="btnStart">
+            🚀 Zaczynam!
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Flashcard View -->
+        <div id="flashcardView" class="view active">
+          <div class="flashcard">
+            <div class="flashcard-header">
+              <span class="word-number" id="wordNumber">1/1000</span>
+            </div>
+
+            <h2 class="spanish-word" id="spanishWord">como - cómo</h2>
+
+            <div class="translation-section">
+              <h3 class="polish-translation" id="polishTranslation">
+                jako, jak
+              </h3>
+              <p class="description" id="description">
+                Używane do porównań i pytań "jak?"
+              </p>
+            </div>
+
+            <div class="examples-section">
+              <h4>Przykładowe zdania:</h4>
+              <div class="example" id="example1">
+                <p class="example-spanish">Como una manzana.</p>
+                <p class="example-polish">Jem jabłko.</p>
+              </div>
+              <div class="example" id="example2">
+                <p class="example-spanish">¿Cómo estás?</p>
+                <p class="example-polish">Jak się masz?</p>
+              </div>
+              <div class="example" id="example3">
+                <p class="example-spanish">Es como mi hermano.</p>
+                <p class="example-polish">Jest jak mój brat.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-remember" id="btnRemember">
+              <span>✓</span> Pamiętam
+            </button>
+          </div>
+
+          <div class="navigation">
+            <button class="btn btn-nav btn-previous" id="btnPrevious">
+              <span>←</span> Poprzednie
+            </button>
+            <button class="btn btn-nav btn-next" id="btnNext">
+              Następne <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz View -->
+        <div id="quizView" class="view">
+          <div class="quiz-container">
+            <div class="quiz-header">
+              <h2>Quiz</h2>
+              <p class="quiz-score">
+                Wynik: <span id="quizScore">0</span>/<span id="quizTotal"
+                  >0</span
+                >
+              </p>
+            </div>
+
+            <div class="quiz-card">
+              <h3 class="quiz-question" id="quizQuestion">¿Cómo estás?</h3>
+
+              <div class="quiz-options" id="quizOptions">
+                <!-- Options will be inserted here -->
+              </div>
+            </div>
+
+            <div class="quiz-actions">
+              <button class="btn btn-secondary" id="btnQuitQuiz">
+                Zakończ quiz
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div class="progress-section">
+          <div class="progress-label">
+            <span>Postęp nauki</span>
+            <span id="progressText">0/1000</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="footer-actions">
+          <button class="btn btn-quiz" id="btnStartQuiz">
+            🎯 Rozpocznij Quiz
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

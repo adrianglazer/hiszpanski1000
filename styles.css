@@ -535,9 +535,11 @@ body {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
   padding: 12px;
+  padding-bottom: 16px;
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
   margin-top: 10px;
+  margin-bottom: 8px;
 }
 
 .progress-section {
@@ -669,6 +671,11 @@ body {
   .quiz-options {
     max-height: 350px;
   }
+
+  .app-footer {
+    padding-bottom: 18px;
+    margin-bottom: 10px;
+  }
 }
 
 @media (max-width: 390px) {
@@ -705,6 +712,8 @@ body {
 
   .app-footer {
     padding: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .quiz-question {

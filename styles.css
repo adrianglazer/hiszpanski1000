@@ -8,6 +8,22 @@
   outline: none;
 }
 
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button:focus,
+button:active {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
 ::selection {
   background: rgba(255, 230, 109, 0.3);
   color: inherit;
@@ -38,6 +54,7 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .app-container {
@@ -465,9 +482,8 @@ body {
 }
 
 .quiz-option:hover {
-  background: #e1e4e8;
+  background: #e9ecef;
   border-color: var(--secondary-color);
-  transform: scale(1.02);
 }
 
 .quiz-option:focus {
@@ -475,7 +491,7 @@ body {
 }
 
 .quiz-option:active {
-  transform: scale(0.98);
+  background: #dee2e6;
 }
 
 .quiz-option.correct {
@@ -498,7 +514,6 @@ body {
 .quiz-option.disabled:hover,
 .quiz-option.correct:hover,
 .quiz-option.incorrect:hover {
-  transform: none;
   background: inherit;
   border-color: inherit;
 }
@@ -717,5 +732,28 @@ body {
   .quiz-options {
     max-height: 300px;
     gap: 10px;
+  }
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .quiz-option:hover {
+    background: #f8f9fa;
+    border-color: transparent;
+  }
+
+  .btn:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-quiz:hover {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #ffd93d 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-quiz.quiz-active:hover {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 }

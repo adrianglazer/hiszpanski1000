@@ -11209,7 +11209,10 @@ function displayQuizQuestion() {
         const button = document.createElement('button');
         button.className = 'quiz-option';
         button.textContent = option;
-        button.onclick = () => checkQuizAnswer(option, word.polish);
+        button.onclick = (e) => {
+            e.target.blur();
+            checkQuizAnswer(option, word.polish);
+        };
         optionsContainer.appendChild(button);
     });
 }

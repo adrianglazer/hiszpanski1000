@@ -11057,6 +11057,7 @@ function displayFlashcard() {
     }
 
     updateStats();
+    updateQuizButton();
 }
 
 // Update statistics
@@ -11065,6 +11066,22 @@ function updateStats() {
 
     const progressPercent = (memorizedWords.size / 1000) * 100;
     document.getElementById('progressFill').style.width = `${progressPercent}%`;
+}
+
+// Update quiz button state
+function updateQuizButton() {
+    const btnQuiz = document.getElementById('btnStartQuiz');
+    const memorizedCount = memorizedWords.size;
+    const wordsNeeded = Math.max(0, 4 - memorizedCount);
+
+    if (wordsNeeded > 0) {
+        btnQuiz.classList.add('disabled');
+        const wordForm = wordsNeeded === 1 ? 'słowo' : (wordsNeeded < 5 ? 'słowa' : 'słów');
+        btnQuiz.textContent = `Quiz: Zapamiętaj jeszcze ${wordsNeeded} ${wordForm}`;
+    } else {
+        btnQuiz.classList.remove('disabled');
+        btnQuiz.textContent = '🎯 Rozpocznij Quiz';
+    }
 }
 
 // Handle "Remember" button
@@ -11096,12 +11113,21 @@ function handleNext() {
     displayFlashcard();
 }
 
+// Handle quiz button click (toggle between start and quit)
+function handleQuizButton() {
+    const btnQuiz = document.getElementById('btnStartQuiz');
+    if (btnQuiz.classList.contains('quiz-active')) {
+        quitQuiz();
+    } else {
+        startQuiz();
+    }
+}
+
 // Start quiz
 function startQuiz() {
     const memorizedArray = Array.from(memorizedWords);
     if (memorizedArray.length < 4) {
-        alert('Zapamiętaj przynajmniej 4 słowa, aby rozpocząć quiz!');
-        return;
+        return; // Button should be disabled, so this shouldn't happen
     }
 
     // Select up to 10 random memorized words
@@ -11118,6 +11144,30 @@ function startQuiz() {
 
     currentQuizIndex = 0;
     quizScore = 0;
+
+    // Change button to "Zakończ quiz"
+    const btnQuiz = document.getElementById('btnStartQuiz');
+    btnQuiz.textContent = '❌ Zakończ Quiz';
+    btnQuiz.classList.add('quiz-active');
+
+    // Reset quiz container to initial state
+    const quizContainer = document.querySelector('.quiz-container');
+    quizContainer.innerHTML = `
+        <div class="quiz-header">
+            <h2>Quiz</h2>
+            <p class="quiz-score">
+                Wynik: <span id="quizScore">0</span>/<span id="quizTotal">0</span>
+            </p>
+        </div>
+
+        <div class="quiz-card">
+            <h3 class="quiz-question" id="quizQuestion"></h3>
+
+            <div class="quiz-options" id="quizOptions">
+                <!-- Options will be inserted here -->
+            </div>
+        </div>
+    `;
 
     showView('quiz');
     displayQuizQuestion();
@@ -11170,6 +11220,7 @@ function checkQuizAnswer(selected, correct) {
 
     options.forEach(option => {
         option.classList.add('disabled');
+        option.blur(); // Remove focus state on mobile
         if (option.textContent === correct) {
             option.classList.add('correct');
         } else if (option.textContent === selected && selected !== correct) {
@@ -11208,16 +11259,17 @@ function showQuizResults() {
         <div class="quiz-result">
             <h3>${message}</h3>
             <p>Wynik: ${quizScore}/${quizWords.length} (${percentage}%)</p>
-            <button class="btn btn-next" id="btnBackToFlashcards">Powrót do fiszek</button>
         </div>
     `;
-
-    // Add event listener to the button
-    document.getElementById('btnBackToFlashcards').addEventListener('click', quitQuiz);
 }
 
 // Quit quiz
 function quitQuiz() {
+    // Restore button to normal state
+    const btnQuiz = document.getElementById('btnStartQuiz');
+    btnQuiz.classList.remove('quiz-active');
+    updateQuizButton(); // This will restore the correct state (enabled/disabled)
+
     showView('flashcard');
 }
 
@@ -11259,6 +11311,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnRemember').addEventListener('click', handleRemember);
     document.getElementById('btnPrevious').addEventListener('click', handlePrevious);
     document.getElementById('btnNext').addEventListener('click', handleNext);
-    document.getElementById('btnStartQuiz').addEventListener('click', startQuiz);
-    document.getElementById('btnQuitQuiz').addEventListener('click', quitQuiz);
+    document.getElementById('btnStartQuiz').addEventListener('click', handleQuizButton);
 });

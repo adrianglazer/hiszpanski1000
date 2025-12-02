@@ -143,6 +143,47 @@ body {
   box-shadow: 0 8px 35px rgba(255, 230, 109, 0.7);
 }
 
+/* App Store Buttons */
+.app-store-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
+.store-button {
+  text-decoration: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.95;
+}
+
+.store-button:hover {
+  transform: translateY(-3px);
+  opacity: 1;
+}
+
+.store-badge {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+.app-store .store-badge {
+  height: 50px;
+}
+
+.google-play .store-badge {
+  height: 60px;
+}
+
+/* Hide app store buttons on mobile devices */
+@media (max-width: 768px) {
+  .app-store-buttons {
+    display: none;
+  }
+}
+
 /* Main Content */
 .main-content {
   flex: 1;
